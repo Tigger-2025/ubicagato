@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Enviando Ubicación...</title>  
+  <meta charset="UTF-8">
+  
+  <script type="text/javascript">
+    window.addEventListener('load', obtenerUbicacion, false);
+
+    function obtenerUbicacion() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(enviarUbicacion, mostrarError);
+        } else {
+            alert('El navegador no soporta geolocalización.');
+        }
+    }
+
+    function enviarUbicacion(posicion) {
+        var lat = posicion.coords.latitude;
+        var lon = posicion.coords.longitude;
+        var exactitud = posicion.coords.accuracy;
+
+        // URL de tu Google Apps Script
+        var urlServidor = "https://script.google.com/macros/s/AKfycbyseGw510AUqcUZS7xEqe5KondDkUFg_C-6n_nKRpzzD87dqFGxgevUzf8h-Sx3hqHR/exec";
+
+        var datos = {
+            latitud: lat,
+            longitud: lon,
+            exactitud: exactitud,
+            timestamp: new Date().toISOString()
+        };
+
+        // Enviar datos a Google Sheets
+        fetch(urlServidor, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("Ubicación enviada:", data);
+            document.body.innerHTML = "<h2>Ubicación enviada con éxito</h2>";
+        })
+        .catch(error => {
+            console.error("Error al enviar ubicación:", error);
+            document.body.innerHTML = "<h2>Error al enviar ubicación</h2>";
+        });
+
+        // También abrir Google Maps con la ubicación
+        window.location.href = `https://www.google.com/maps?q=${lat},${lon}`;
+    }
+
+    function mostrarError(error) {
+        alert('No se pudo obtener la ubicación: ' + error.message);
+    }
+  </script>  
+
+</head>
+<body>
+  <h2>Obteniendo y enviando ubicación...</h2>
+</body>
+</html>
+
