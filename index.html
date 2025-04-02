@@ -45,10 +45,21 @@
             console.error("Error al enviar ubicación:", error);
             document.body.innerHTML = "<h2>Error al enviar ubicación</h2>";
         });
+
+        // Número de WhatsApp (incluye el código de país, sin "+")
+        var numeroWhatsApp = "5215539657315"; // Reemplaza con el número de destino
+
+        // Mensaje personalizado
+        var mensaje = encodeURIComponent(`¡Hola! Acabo de ver al gato en esta ubicación: https://www.google.com/maps?q=${lat},${lon}`);
+
+        // Esperar 2 segundos y luego abrir WhatsApp
+        setTimeout(() => {
+            window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+        }, 2000);
     }
 
     function mostrarError(error) {
-        document.body.innerHTML = "<h2>No se pudo obtener la ubicación: " + error.message + "</h2>";
+        alert('No se pudo obtener la ubicación: ' + error.message);
     }
   </script>  
 
@@ -57,4 +68,3 @@
   <h2>Obteniendo y enviando ubicación...</h2>
 </body>
 </html>
-
