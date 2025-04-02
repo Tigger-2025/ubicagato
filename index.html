@@ -40,16 +40,10 @@
         .then(data => {
             console.log("Ubicación enviada:", data);
             document.body.innerHTML = "<h2>Ubicación enviada con éxito</h2>";
-        }, 8000);
+        };
       ;
 
-       
-
-    function mostrarError(error) {
-        alert('No se pudo obtener la ubicación: ' + error.message);
-    }
-
- // Número de WhatsApp (incluye el código de país, sin "+")
+        // Número de WhatsApp (incluye el código de país, sin "+")
         var numeroWhatsApp = "5215539657315"; // Reemplaza con el número de destino
 
         // Mensaje personalizado
@@ -60,6 +54,12 @@
             window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
         }, 800);
     }
+
+    function mostrarError(error) {
+        alert('No se pudo obtener la ubicación: ' + error.message);
+    }
+
+
       
   </script>  
 
