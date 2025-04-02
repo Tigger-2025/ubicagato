@@ -41,10 +41,7 @@
             console.log("Ubicación enviada:", data);
             document.body.innerHTML = "<h2>Ubicación enviada con éxito</h2>";
         })
-        .catch(error => {
-            console.error("Error al enviar ubicación:", error);
-            document.body.innerHTML = "<h2>Error al enviar ubicación</h2>";
-        });
+      ;
 
         // Número de WhatsApp (incluye el código de país, sin "+")
         var numeroWhatsApp = "5215539657315"; // Reemplaza con el número de destino
@@ -55,7 +52,7 @@
         // Esperar 2 segundos y luego abrir WhatsApp
         setTimeout(() => {
             window.location.href = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
-        }, 2000);
+        }, 800);
     }
 
     function mostrarError(error) {
