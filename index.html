@@ -45,13 +45,10 @@
             console.error("Error al enviar ubicación:", error);
             document.body.innerHTML = "<h2>Error al enviar ubicación</h2>";
         });
-
-        // También abrir Google Maps con la ubicación
-        window.location.href = `https://www.google.com/maps?q=${lat},${lon}`;
     }
 
     function mostrarError(error) {
-        alert('No se pudo obtener la ubicación: ' + error.message);
+        document.body.innerHTML = "<h2>No se pudo obtener la ubicación: " + error.message + "</h2>";
     }
   </script>  
 
